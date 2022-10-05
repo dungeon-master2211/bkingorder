@@ -49,7 +49,11 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.enable("trust proxy")
 connectPassport()
-
+app.get('/',function(req,res,next){
+    res.status(200).send(
+        `<h1>Welcome </h1>`
+    )
+})
 app.use('/api/v1',router)
 app.use('/api/v1',orderRoute)
 
