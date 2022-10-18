@@ -86,7 +86,7 @@ export const paymentVerification = catchAsyncError(async(req,res,next)=>{
 export const myOrders = catchAsyncError(async(req,res,next)=>{
     const orders = await User.find({
         user:req.user._id
-    }).populate('user','name').exec()
+    }).populate({ path: 'user', select: 'name' }).exec()
 
     res.status(200).send({
         success:true,
