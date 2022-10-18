@@ -98,6 +98,7 @@ export const getOrderDetails = catchAsyncError(async(req,res,next)=>{
     const order = await Order.findById(req.params.id)
     const user = await User.findById(order.user)
     const orders = {...order,...user}
+    console.log(order,user,orders)
     if(!order) return next(new ErrorHandler("Invalid order id",404))
 
     res.status(200).send({
