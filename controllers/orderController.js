@@ -84,7 +84,7 @@ export const paymentVerification = catchAsyncError(async(req,res,next)=>{
 })
 
 export const myOrders = catchAsyncError(async(req,res,next)=>{
-    const orders = await User.find({
+    const orders = await Order.find({
         user:req.user._id
     })
 
