@@ -86,7 +86,7 @@ export const paymentVerification = catchAsyncError(async(req,res,next)=>{
 export const myOrders = catchAsyncError(async(req,res,next)=>{
     const orders = await User.find({
         user:req.user._id
-    }).populate('user','name')
+    }).populate('user','name').exec()
 
     res.status(200).send({
         success:true,
@@ -95,7 +95,7 @@ export const myOrders = catchAsyncError(async(req,res,next)=>{
 })
 
 export const getOrderDetails = catchAsyncError(async(req,res,next)=>{
-    const order = await Order.findById(req.params.id).populate('user','name')
+    const order = await Order.findById(req.params.id).populate('user','name').exec()
 
     if(!order) return next(new ErrorHandler("Invalid order id",404))
 
