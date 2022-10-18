@@ -95,13 +95,14 @@ export const myOrders = catchAsyncError(async(req,res,next)=>{
 })
 
 export const getOrderDetails = catchAsyncError(async(req,res,next)=>{
-    const order = await Order.findById(req.params.id).populate('user','name').exec()
-
+    const order = await Order.findById(req.params.id)
+    const user = await User.findById(order.user)
+    const orders = {...order,...user}
     if(!order) return next(new ErrorHandler("Invalid order id",404))
 
     res.status(200).send({
         success:true,
-        order
+        orders
     })
 })
 
