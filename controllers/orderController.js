@@ -110,10 +110,14 @@ export const getOrderDetails = catchAsyncError(async(req,res,next)=>{
 })
 
 export const getAdminOrders = catchAsyncError(async(req,res,next)=>{
-    const orders = await Order.find({}).populate('user','name')
+    const order = await Order.find({})
+    const users =  order.map(async item=>(
+        await User.findById(item.user)
+    ))
     res.status(200).send({
         success:true,
-        orders
+        order,
+        users
     })
 })
 
