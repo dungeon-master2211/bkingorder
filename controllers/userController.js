@@ -36,7 +36,7 @@ export const getAdminStats = catchAsyncError(async(req,res,next)=>{
 
     const orders = await Order.find({})
 
-    const prepairing = orders.filter(i=>i.orderStatus==='Prepairing')
+    const prepairing = orders.filter(i=>i.orderStatus==='Preparing')
     const shipped = orders.filter(i=>i.orderStatus==='Shipped')
     const delivered = orders.filter(i=>i.orderStatus==='Delivered')
 
