@@ -103,7 +103,9 @@ export const getOrderDetails = catchAsyncError(async(req,res,next)=>{
 
     res.status(200).send({
         success:true,
-        orders
+        order,
+        user,
+        id
     })
 })
 
