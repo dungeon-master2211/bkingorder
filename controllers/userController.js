@@ -1,6 +1,7 @@
 import { catchAsyncError } from "../middlewares/errorMiddleware.js"
 import { User } from "../models/User.js"
 import {Order} from "../models/Order.js"
+import { Message } from "../models/Message.js"
 export const myProfile = async(req,res,next)=>{
         res.status(200).send({
             success:true,
@@ -55,5 +56,15 @@ export const getAdminStats = catchAsyncError(async(req,res,next)=>{
             delivered
         },
         totalIncome 
+    })
+})
+
+export const sendMessage = catchAsyncError(async(req,res,next)=>{
+    const {name,email,message} = req.body
+    const send = await Message.create({name,email,message})
+    await send.save()
+    return res.status(200).send({
+        success:true,
+        message:"Successfully sent"
     })
 })

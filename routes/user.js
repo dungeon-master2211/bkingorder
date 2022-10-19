@@ -1,6 +1,6 @@
 import express from "express"
 import passport from "passport"
-import {myProfile,logout, getAdminUsers, getAdminStats} from "../controllers/userController.js"
+import {myProfile,logout, getAdminUsers, getAdminStats, sendMessage} from "../controllers/userController.js"
 import { authorizeAdmin, isAuthenticated } from "../middlewares/isAuthenticated.js"
 const router = express.Router()
 router.get("/",function(req,res,next){
@@ -23,5 +23,6 @@ router.get("/logout",logout)
 
 router.get("/admin/users",isAuthenticated,authorizeAdmin,getAdminUsers)
 router.get("/admin/stats",isAuthenticated,authorizeAdmin,getAdminStats)
+router.post("/send",isAuthenticated,sendMessage)
 export default router
 
